@@ -1,3 +1,5 @@
+let pieChart;
+
 // funkcja aktualizująca wkład własny na podstawie kapitału i procentu
 function updateDownpayment() {
 	const principal = parseFloat(document.getElementById("principal").value);
@@ -101,4 +103,49 @@ function calculateMortgage() {
 	document.getElementById("total-principal").innerText = loanAmount.toFixed(2);
 	document.getElementById("total-interest").innerText =
 		totalInterest.toFixed(2);
+
+	// zapis w pamięci lokalnej
+	const mortgageData = {
+		principal: loanAmount,
+		numPayments: totalMonths,
+		monthlyPayment: monthlyPayment,
+		monthlyInterestRate: monthlyInterestRate,
+		extraPayment: extraPayment,
+	};
+	localStorage.setItem("mortgageData", JSON.stringify(mortgageData));
+
+	// włączenie przycisku
+	document.getElementById("amortization-button").disabled = false;
+
+	drawPieChart(totalInterest, loanAmount);
+}
+
+// funkcja do rysowania wykresu kołowego
+function drawPieChart(totalInterest, totalPrincipal) {
+	const ctx = document.getElementById("pie-chart").getContext("2d");
+
+	if (pieChart) {
+		pieChart.destroy();
+	}
+
+	pieChart = new Chart(ctx, {
+		type: "pie",
+		data: {
+			labels: ["principal", "Interest"],
+			datasets: [
+				{
+					label: "Mortgage Breakdown",
+					data: [totalPrincipal, totalInterest],
+					backgroundColor: ["#9EDDFF", "#6499E9"],
+					borderColor: "#fff",
+					borderWidth: 1,
+				},
+			],
+		},
+
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+		},
+	});
 }

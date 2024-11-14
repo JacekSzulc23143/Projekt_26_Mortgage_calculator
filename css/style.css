@@ -165,3 +165,9 @@ button#amortization-button:hover {
 	color: #00796b;
 	font-weight: bold;
 }
+
+.chart-container{
+	position: relative;
+	margin-top: 20px;
+	height: 400px;
+}
