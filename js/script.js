@@ -149,3 +149,26 @@ function drawPieChart(totalInterest, totalPrincipal) {
 		},
 	});
 }
+
+// funkcja resetująca inputy
+function clearFields() {
+	document.getElementById("principal").value = "";
+	document.getElementById("downpayment").value = "";
+	document.getElementById("downpayment-percentage").value = "";
+	document.getElementById("interest").value = "";
+	document.getElementById("years").value = 30;
+	document.getElementById("extra-payment").value = "";
+	document.getElementById("monthly-payment").innerText = "0.00";
+	document.getElementById("total-emi").innerText = "0.00";
+	document.getElementById("total-principal").innerText = "0.00";
+	document.getElementById("total-interest").innerText = "0.00";
+	document.getElementById("pie-chart").disabled = true;
+
+	// do resetowania wykresu kołowego
+	if (pieChart) {
+		pieChart.destroy();
+	}
+
+	const ctx = document.getElementById("pie-chart").getContext("2d");
+	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.hight);
+}
