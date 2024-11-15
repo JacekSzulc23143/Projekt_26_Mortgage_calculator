@@ -54,7 +54,7 @@ function calculateMortgage() {
 	}
 	if (extraPayment >= principal - downpayment) {
 		alert(
-			"Dodatkowa płatność nie może być większa ani równa pozostałęj kwocie kredytu."
+			"Dodatkowa płatność nie może być większa ani równa pozostałej kwocie kredytu."
 		);
 		return;
 	}
@@ -171,4 +171,39 @@ function clearFields() {
 
 	const ctx = document.getElementById("pie-chart").getContext("2d");
 	ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.hight);
+}
+
+// funkcja nasłuchująca zmianę kwoty kredytu
+document.addEventListener("DOMContentLoaded", function () {
+	document.getElementById("principal").addEventListener("input", function () {
+		const principal = parseFloat(this.value);
+		const downpayment =
+			parseFloat(document.getElementById("downpayment").value) || 0;
+		const percentage =
+			parseFloat(document.getElementById("downpayment-percentage").value) || 0;
+
+		if (principal && downpayment && percentage >= 0 && percentage < 100) {
+			const newDownpayment = (percentage / 100) * principal;
+			document.getElementById("downpayment").value = newDownpayment.toFixed(2);
+		}
+	});
+
+	document
+		.getElementById("downpayment-percentage")
+		.addEventListener("input", updateDownpayment);
+
+	const inputs = document.querySelectorAll('input [type="number"]');
+	inputs.forEach(input => {
+		input.addEventListener("input", function () {
+			const allFilled = Array.from(input).every(
+				input => input.value.trim() !== ""
+			);
+			document.getElementById("amortization-button").disabled = !allFilled;
+		});
+	});
+});
+
+// funkcja wyświetlająca harmonogram amortyzacji
+function viewAmortizationPage() {
+	window.location.href = "amortization.html";
 }
