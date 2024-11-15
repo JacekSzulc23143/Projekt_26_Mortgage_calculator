@@ -207,3 +207,65 @@ document.addEventListener("DOMContentLoaded", function () {
 function viewAmortizationPage() {
 	window.location.href = "amortization.html";
 }
+
+// po załadowaniu strony amortyzacji
+if (window.location.pathname.endsWith("amortization.html")) {
+	document.addEventListener("DOMContentLoaded", function () {
+		const mortgageData = JSON.parse(localStorage.getItem("mortgageData"));
+
+		if (!mortgageData) {
+			alert(
+				"Brak dostępnych danych o kredytach hipotecznych. Proszę wrócić do strony głównej."
+			);
+			window.location.href = "index.html";
+		}
+
+		const amortizationTable = document.getElementById("amortization-table");
+		amortizationTable.innerHTML = "";
+
+		const headerRow = document.createElement("tr");
+		headerRow.innerHTML = `
+		<th>Month</th>
+		<th>Payment</th>
+		<th>Interest</th>
+		<th>Principal</th>
+		<th>Extra Payment</th>
+		<th>Balance</th>
+		`;
+		amortizationTable.appendChild(headerRow);
+
+		let remainingBalance = mortgageData.principal;
+
+		const totalPayments = mortgageData.numPayments;
+
+		for (let i = 1; i <= totalPayments; i++) {
+			const interestPayment =
+				remainingBalance * mortgageData.monthlyInterestRate;
+
+			let principalPayment = mortgageData.monthlyPayment - interestPayment;
+
+			let extraPayment = mortgageData.extraPayment;
+
+			if (remainingBalance < principalPayment + extraPayment) {
+				principalPayment = remainingBalance;
+				extraPayment = 0;
+				remainingBalance = 0;
+			} else {
+				remainingBalance -= principalPayment + extraPayment;
+			}
+
+			const row = document.createElement("tr");
+			row.innerHTML = `
+			<td>${i}</td>
+			<td>${(principalPayment + interestPayment + extraPayment).toFixed(2)}</td>
+			<td>${interestPayment.toFixed(2)}</td>
+			<td>${principalPayment.toFixed(2)}</td>
+			<td>${extraPayment.toFixed(2)}</td>
+			<td>${remainingBalance.toFixed(2)}</td>
+			`;
+			amortizationTable.appendChild(row);
+
+			if (remainingBalance <= 0) break;
+		}
+	});
+}
