@@ -225,3 +225,65 @@ tr:nth-child(even) {
 .back-button:hover {
 	background-color: #004d40;
 }
+
+/* responsywność */
+@media (max-width: 1024px) {
+	.container {
+		flex-direction: column;
+	}
+
+	.calculator,
+	.results {
+		margin-right: 0;
+		margin-bottom: 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.amortization-container {
+		padding: 20px;
+	}
+
+	th,
+	td {
+		padding: 8px;
+		font-size: 0.9em;
+	}
+
+	.button-container {
+		flex-direction: column;
+	}
+
+	button {
+		margin-bottom: 15px;
+	}
+
+	button.calculate,
+	button.clear {
+		margin-right: 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.percentage-group {
+		flex-direction: row;
+	}
+
+	th,
+	td {
+		padding: 6px;
+		font-size: 0.8em;
+	}
+
+	.amortization-container {
+		padding: 15px;
+	}
+
+	table {
+		font-size: 0.75em;
+	}
+
+	input[type="number"] {
+		font-size: 0.9em;
+	}
+}
