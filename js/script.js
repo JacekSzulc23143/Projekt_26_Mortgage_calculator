@@ -131,10 +131,10 @@ function drawPieChart(totalInterest, totalPrincipal) {
 	pieChart = new Chart(ctx, {
 		type: "pie",
 		data: {
-			labels: ["principal", "Interest"],
+			labels: ["kapitał", "odsetki"],
 			datasets: [
 				{
-					label: "Mortgage Breakdown",
+					label: "Podział kredytu hipotecznego",
 					data: [totalPrincipal, totalInterest],
 					backgroundColor: ["#9EDDFF", "#6499E9"],
 					borderColor: "#fff",
@@ -225,12 +225,12 @@ if (window.location.pathname.endsWith("amortization.html")) {
 
 		const headerRow = document.createElement("tr");
 		headerRow.innerHTML = `
-		<th>Month</th>
-		<th>Payment</th>
-		<th>Interest</th>
-		<th>Principal</th>
-		<th>Extra Payment</th>
-		<th>Balance</th>
+		<th>Miesiąc</th>
+		<th>Wysokość Raty</th>
+		<th>Odsetki</th>
+		<th>Kapitał</th>
+		<th>Dodatkowa Płatność</th>
+		<th>Saldo</th>
 		`;
 		amortizationTable.appendChild(headerRow);
 

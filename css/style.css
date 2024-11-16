@@ -161,7 +161,7 @@ button#amortization-button:hover {
 	margin: 10px 0;
 }
 
-.result-item span {
+.result-item span:nth-child(2) {
 	color: #00796b;
 	font-weight: bold;
 }

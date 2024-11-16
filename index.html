@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calculator</title>
+    <title>Kalkulator Kredytu Hipotecznego</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,65 +18,62 @@
 
 <body>
 
-    <h1>Mortgage Calculator</h1>
+    <h1>Kalkulator Kredytu Hipotecznego</h1>
     <div class="container">
         <div class="calculator">
 
             <!-- Principal Amount -->
-            <label for="principal">Principal Amount</label>
-            <input type="number" id="principal" placeholder="Enter the principal amount">
+            <label for="principal">Kwota Kredytu</label>
+            <input type="number" id="principal" placeholder="Wprowadź kwotę kredytu">
 
             <!-- Down Payment -->
-            <label for="downpayment">Down Payment:</label>
+            <label for="downpayment">Wkład Własny:</label>
             <div class="input-group">
-                <input type="number" id="downpayment" placeholder="Down payment amount" oninput="updatePercentage()">
+                <input type="number" id="downpayment" placeholder="Kwota wkładu własnego" oninput="updatePercentage()">
             </div>
             <div class="percentage-group">
-                <input type="number" id="downpayment-percentage" placeholder="Percentage" style="width: 25%;" min="0"
+                <input type="number" id="downpayment-percentage" placeholder="Procent" style="width: 25%;" min="0"
                     max="100" oninput="updateDownpayment()">
-                <span style="display: inline-block; width: 75%;">% of principal</span>
+                <span style="display: inline-block; width: 75%;">% kwoty kredytu</span>
             </div>
 
             <!-- Annual Interest Rate (%) -->
-            <label for="interest">Annual Interest Rate (%)</label>
-            <input type="number" id="interest" placeholder="Enter interest rate">
+            <label for="interest">Roczna Stopa Procentowa (%)</label>
+            <input type="number" id="interest" placeholder="Wprowadź stopę procentową">
 
             <!-- Loan Terms (Years) -->
-            <label for="years">Loan Terms (Years)</label>
-            <input type="number" id="years" min="1" max="30" value="30" placeholder="Number of years for loan">
+            <label for="years">Okres Kredytowania (Lata)</label>
+            <input type="number" id="years" min="1" max="35" value="35" placeholder="Liczba lat na zaciągnięcie kredytu">
 
             <!-- Extra Payment -->
-            <label for="extra-payment">Extra Payment</label>
-            <input type="number" id="extra-payment" placeholder="Enter extra payment per month">
+            <label for="extra-payment">Dodatkowa Płatność</label>
+            <input type="number" id="extra-payment" placeholder="Wprowadź dodatkową opłatę miesięczną">
 
             <!-- Buttons -->
             <div class="button-container">
-                <button class="calculate" onclick="calculateMortgage()">Calculate</button>
-                <button class="clear" onclick="clearFields()">Clear</button>
+                <button class="calculate" onclick="calculateMortgage()">Oblicz</button>
+                <button class="clear" onclick="clearFields()">Wyczyść</button>
             </div>
-            <button id="amortization-button" onclick="viewAmortizationPage()" disabled>View Amortization Table</button>
+            <button id="amortization-button" onclick="viewAmortizationPage()" disabled>Zobacz Tabelę Amortyzacji</button>
 
         </div>
         <div class="results">
-            <h2>Results</h2>
+            <h2>Podsumowanie</h2>
             <div class="result-item">
-                <span>Monthly Payment: </span>
-                $
-                <span id="monthly-payment">0.00</span>
+                <span>Rata Miesięczna: </span>
+                <span id="monthly-payment">0.00</span> zł
             </div>
             <div class="result-item">
-                <span>Total EMI: </span>
+                <span>Łącznie Miesięcy: </span>
                 <span id="total-emi">0.00</span>
             </div>
             <div class="result-item">
-                <span>Total Principal: </span>
-                $
-                <span id="total-principal">0.00</span>
+                <span>Całkowity Kapitał: </span>
+                <span id="total-principal">0.00</span> zł
             </div>
             <div class="result-item">
-                <span>Total Interest: </span>
-                $
-                <span id="total-interest">0.00</span>
+                <span>Całkowite Odsetki: </span>
+                <span id="total-interest">0.00</span> zł
             </div>
 
             <div class="chart-container">
