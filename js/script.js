@@ -58,7 +58,7 @@ function calculateMortgage() {
 		);
 		return;
 	}
-	if (interestRate <= 0 && interestRate >= 100) {
+	if (interestRate <= 0 || interestRate >= 100) {
 		alert("Stopa procentowa musi być większa od 0 i mniejsza od 100.");
 		return;
 	}
